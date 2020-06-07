@@ -13,8 +13,7 @@ pipeline {
             steps {
                 bat 'whoami'
                 bat 'npm install'
-                bat 'npm run build'
-                echo 'building app'
+                //bat 'npm run build'
             }
         }
         stage('Test') {
@@ -24,8 +23,9 @@ pipeline {
         }
         stage('Archive Artifacts') {
               steps {
-        		bat 'zip -r build.zip build/'
-        		step([$class: 'ArtifactArchiver', artifacts: 'build.zip', fingerprint: true])
+                bat 'npm run build'
+        		//bat 'zip -r build.zip build/'
+        		//step([$class: 'ArtifactArchiver', artifacts: 'build.zip', fingerprint: true])
               }
         }
         stage('Deploy') {
