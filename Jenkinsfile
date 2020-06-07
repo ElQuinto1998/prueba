@@ -20,14 +20,12 @@ pipeline {
         stage('Test') {
              steps {
                 bat 'npm test'
-                echo 'testing app'
              }
         }
         stage('Archive Artifacts') {
               steps {
         		bat 'zip -r dist.zip dist/'
         		step([$class: 'ArtifactArchiver', artifacts: 'dist.zip', fingerprint: true])
-        		echo 'getting artifacts'
               }
         }
         stage('Deploy') {
