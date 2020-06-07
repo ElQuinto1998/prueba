@@ -10,21 +10,22 @@ pipeline {
         FIREBASE_TOKEN = credentials('firebase-token')
     }
     stages {
-        stage('Build') {
+        stage('Install dependencies') {
             steps {
                 bat 'npm install'
+                echo 'Installing dependencies'
             }
         }
-        stage('Test') {
+        stage('Unit tests') {
              steps {
                 bat 'npm test'
+                echo 'Running unit tests'
              }
         }
-        stage('Archive Artifacts') {
+        stage('Build') {
               steps {
                 bat 'npm run build'
-        		//bat 'zip -r build.zip build/'
-        		//step([$class: 'ArtifactArchiver', artifacts: 'build.zip', fingerprint: true])
+                echo 'Building app'
               }
         }
         stage('Deploy') {
