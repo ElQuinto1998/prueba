@@ -24,13 +24,13 @@ pipeline {
         }
         stage('Archive Artifacts') {
               steps {
-        		bat 'zip -r dist.zip dist/'
-        		step([$class: 'ArtifactArchiver', artifacts: 'dist.zip', fingerprint: true])
+        		bat 'zip -r build.zip build/'
+        		step([$class: 'ArtifactArchiver', artifacts: 'build.zip', fingerprint: true])
               }
         }
         stage('Deploy') {
                steps {
-        	     //sh 'firebase deploy --debug'
+        	     bat 'firebase deploy --debug'
         	     echo 'Deploying app'
                }
          }
