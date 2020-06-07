@@ -1,19 +1,18 @@
 pipeline {
     agent {
         any {
-            image 'node:6-alpine'
+            image 'node:8-alpine'
             args '-p 3000:3000'
         }
     }
     environment {
-            CI = 'true'
-        }
+        CI = 'true'
+        FIREBASE_DEPLOY_TOKEN = credentials('firebase-deploy-token')
+    }
     stages {
         stage('Build') {
             steps {
-                bat 'whoami'
                 bat 'npm install'
-                //bat 'npm run build'
             }
         }
         stage('Test') {
@@ -30,7 +29,8 @@ pipeline {
         }
         stage('Deploy') {
                steps {
-        	     bat 'firebase deploy --debug'
+                 bat 'npm install -g firebase-tools'
+        	     bat firebase deploy -P --debug --token "$FIREBASE_DEPLOY_TOKEN"
         	     echo 'Deploying app'
                }
          }
