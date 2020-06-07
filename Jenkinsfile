@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 bat 'whoami'
-                bat 'rmdir -rf dist/*'
+                bat 'rmdir -rf dist/'
                 bat 'rmdir -rf dist.zip'
                 bat 'npm install'
                 bat 'NODE_OPTIONS="--max-old-space-size=8192" npm run build'
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Archive Artifacts') {
               steps {
-        		sh 'zip -r dist.zip dist/'
+        		bat 'zip -r dist.zip dist/'
         		step([$class: 'ArtifactArchiver', artifacts: 'dist.zip', fingerprint: true])
         		echo 'getting artifacts'
               }

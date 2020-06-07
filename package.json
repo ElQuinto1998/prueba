@@ -11,10 +11,10 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm start",
+    "build": "npm build --prod --aot",
+    "test": "npm test",
+    "eject": "npm eject"
   },
   "eslintConfig": {
     "extends": "react-app"
