@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
                steps {
                  bat 'npm install -g firebase-tools'
-        	     bat  'firebase deploy --token $FIREBASE_TOKEN'
+        	     bat  'firebase deploy --debug'
         	     echo 'Deploying app'
                }
          }
