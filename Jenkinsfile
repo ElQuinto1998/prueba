@@ -12,8 +12,8 @@ pipeline {
         stage('Build') {
             steps {
                 bat 'whoami'
-                bat 'rm -rf dist/*'
-                bat 'rm -rf dist.zip'
+                bat 'rmdir -rf dist/*'
+                bat 'rmdir -rf dist.zip'
                 bat 'npm install'
                 bat 'NODE_OPTIONS="--max-old-space-size=8192" npm run build'
                 echo 'building app'
