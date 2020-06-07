@@ -11,13 +11,32 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                bat 'whoami'
+                bat 'rm -rf dist/*'
+                bat 'rm -rf dist.zip'
                 bat 'npm install'
+                bat 'NODE_OPTIONS="--max-old-space-size=8192" npm run build'
+                echo 'building app'
             }
         }
         stage('Test') {
              steps {
                 bat 'npm test'
+                echo 'testing app'
              }
         }
+        stage('Archive Artifacts') {
+              steps {
+        		sh 'zip -r dist.zip dist/'
+        		step([$class: 'ArtifactArchiver', artifacts: 'dist.zip', fingerprint: true])
+        		echo 'getting artifacts'
+              }
+        }
+        stage('Deploy') {
+               steps {
+        	     //sh 'firebase deploy --debug'
+        	     echo 'Deploying app'
+               }
+         }
     }
 }
