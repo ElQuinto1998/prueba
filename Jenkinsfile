@@ -13,7 +13,7 @@ pipeline {
             steps {
                 bat 'whoami'
                 bat 'npm install'
-                bat 'NODE_OPTIONS="--max-old-space-size=8192" npm run build'
+                bat 'npm run build'
                 echo 'building app'
             }
         }
