@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         CI = 'true'
-        FIREBASE_DEPLOY_TOKEN = credentials('firebase-deploy-token')
+        FIREBASE_TOKEN = credentials('firebase-deploy-token')
     }
     stages {
         stage('Build') {
@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
                steps {
                  bat 'npm install -g firebase-tools'
-        	     bat firebase deploy -P --debug --token "$FIREBASE_DEPLOY_TOKEN"
+        	     bat  firebase deploy --token "$FIREBASE_TOKEN"
         	     echo 'Deploying app'
                }
          }
