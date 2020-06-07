@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         CI = 'true'
-        FIREBASE_TOKEN = credentials('firebase-deploy-token')
+        //FIREBASE_TOKEN = credentials('firebase-deploy-token')
     }
     stages {
         stage('Build') {
